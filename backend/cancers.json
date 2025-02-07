@@ -1,0 +1,83 @@
+{
+  "skin_cancers": [
+    {
+      "type": "Basal Cell Carcinoma",
+      "description": "A common and slow-growing form of skin cancer that arises from the basal cells in the epidermis. Often appears as a pearly or waxy bump, a flat flesh-colored lesion, or a sore that doesn't heal.",
+      "treatment": [
+        "Surgical excision",
+        "Mohs surgery",
+        "Cryotherapy",
+        "Topical treatments (imiquimod, 5-fluorouracil)",
+        "Radiation therapy"
+      ],
+      "next_steps": [
+        "Consult a dermatologist for a biopsy",
+        "Follow up with regular skin checks",
+        "Use sun protection to prevent recurrence"
+      ]
+    },
+    {
+      "type": "Squamous Cell Carcinoma",
+      "description": "A skin cancer that arises from squamous cells in the outer layer of the skin. It can appear as a scaly red patch, an open sore, or a wart-like growth and may bleed or crust over.",
+      "treatment": [
+        "Surgical excision",
+        "Mohs surgery",
+        "Electrodesiccation and curettage",
+        "Cryotherapy",
+        "Radiation therapy"
+      ],
+      "next_steps": [
+        "Consult a dermatologist for a biopsy",
+        "Determine the stage of cancer if advanced",
+        "Regular follow-ups to monitor for recurrence"
+      ]
+    },
+    {
+      "type": "Melanoma",
+      "description": "A dangerous form of skin cancer that originates in the pigment-producing melanocytes. It often appears as a new or changing mole with asymmetry, irregular borders, color variations, a diameter larger than 6mm, and evolving features.",
+      "treatment": [
+        "Surgical removal",
+        "Sentinel lymph node biopsy if advanced",
+        "Immunotherapy (e.g., checkpoint inhibitors)",
+        "Targeted therapy for BRAF-mutant melanoma",
+        "Radiation or chemotherapy in advanced cases"
+      ],
+      "next_steps": [
+        "Immediate dermatological evaluation and biopsy",
+        "Staging to determine spread",
+        "Treatment plan based on stage and mutation status",
+        "Routine skin checks for early detection of recurrence"
+      ]
+    },
+    {
+      "type": "Merkel Cell Carcinoma",
+      "description": "A rare but aggressive skin cancer that arises from Merkel cells in the skin. It often appears as a firm, painless, rapidly growing red or purple nodule.",
+      "treatment": [
+        "Surgical removal with wide margins",
+        "Radiation therapy",
+        "Immunotherapy (avelumab)",
+        "Chemotherapy for metastatic cases"
+      ],
+      "next_steps": [
+        "Urgent evaluation by a dermatologist or oncologist",
+        "Imaging scans to check for spread",
+        "Long-term follow-up for recurrence monitoring"
+      ]
+    },
+    {
+      "type": "Actinic Keratosis",
+      "description": "A precancerous condition caused by long-term sun exposure. It appears as rough, scaly patches on sun-exposed areas and has the potential to develop into squamous cell carcinoma.",
+      "treatment": [
+        "Cryotherapy",
+        "Topical treatments (imiquimod, 5-fluorouracil)",
+        "Photodynamic therapy",
+        "Laser therapy"
+      ],
+      "next_steps": [
+        "Regular dermatological examinations",
+        "Treatment to prevent progression to cancer",
+        "Strict sun protection measures"
+      ]
+    }
+  ]
+}
