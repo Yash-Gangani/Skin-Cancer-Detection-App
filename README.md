@@ -1,4 +1,7 @@
 # Skin-Cancer-Detection-App
+
+**SkinOCare AI** 
+
 DePaul University SE491 Team Project
 
 
