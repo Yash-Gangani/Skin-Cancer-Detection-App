@@ -5,12 +5,12 @@ import { Button } from "../components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
 const contributors = [
-  { name: "Yash Gangani", image: "../../public/shlok.jpg", role: "ML Researcher" },
-  { name: "Zarana Jodhani", image: "../../public/shlok.jpg", role: "DevOps Engineer" },
-  { name: "Shlok Kadakia", image: "../../public/shlok.jpg", role: "Frontend Developer" },
-  { name: "John Smillie", image: "../../public/john.jpg", role: "ML Researcher" },
-  { name: "JayaLaksmi", image: "../../public/shlok.jpg", role: "AI Researcher" },
-  { name: "Ashutosh Bhalala", image: "../../public/ashutosh.jpg", role: "Backend Developer" },
+  { name: "Yash Gangani", image: "/yash.jpg", role: "ML Researcher" },
+  { name: "Zarana Jodhani", image: "/zarana.jpg", role: "DevOps Engineer" },
+  { name: "Shlok Kadakia", image: "/shlok.jpg", role: "Frontend Developer" },
+  { name: "John Smillie", image: "/john.jpg", role: "ML Researcher" },
+  { name: "JayaLaksmi", image: "/shlok.jpg", role: "AI Researcher" },
+  { name: "Ashutosh Bhalala", image: "/ashutosh.jpg", role: "Backend Developer" },
 ];
 
 function AboutPage() {
