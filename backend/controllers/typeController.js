@@ -32,8 +32,19 @@ export const addType = async (req, res) => {
       res.send(err)
     }
   }
+
+  export const getTypeByName = async (req, res) => {
+    try{
+      const type = await Type.findOne(
+        {name:req.params.TypeName}
+      )
+      res.json(type)
+    } catch(err) {
+      res.send(err)
+    }
+  }
   
-  export const updateType = async (req, res) => {
+  export const updateTypeById = async (req, res) => {
     try{
       const type = await Type.findOneAndUpdate(
         { _id: req.params.TypeId },
@@ -46,7 +57,7 @@ export const addType = async (req, res) => {
     }
   }
 
-  export const deleteType = async (req, res) => {
+  export const deleteTypeById = async (req, res) => {
     try{
       await Type.deleteOne({ _id: req.params.TypeId })
       res.json({ message: 'Type deleted successfully' })
