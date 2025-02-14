@@ -2,8 +2,9 @@ import {
     addType,
     getTypes,
     getTypeById,
-    updateType,
-    deleteType,
+    getTypeByName,
+    updateTypeById,
+    deleteTypeById,
     loadDB
   
 } from '../controllers/typeController';
@@ -17,10 +18,13 @@ const routes = (app) => {
     .get(getTypes)
     .post(addType)
 
-    app.route('/type/:TypeId')
+    app.route('/typeId/:TypeId')
     .get(getTypeById)
-    .put(updateType)
-    .delete(deleteType)
+    .put(updateTypeById)
+    .delete(deleteTypeById)
+
+    app.route('/typeName/:TypeName')
+    .get(getTypeByName)
     
 }
 
