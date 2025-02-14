@@ -12,13 +12,21 @@ DePaul University SE491 Team Project
 
 ## Contributed Packages 
 
-Package Name:
+**Package Name:** backend
 
-Technology:
+**Technology:** Node, Express, MongoDB, Babel, Nodemon
 
-Build/Run Instructions:
+**Build/Run Instructions:** 
 
-Environment Variables:
+`$ cd backend`
+
+`$ npm start`
+
+**Local Variables:**
+
+URL: `localhost:4000/`
+
+**Environment Variables:**
 
 <hr>
 
@@ -27,6 +35,8 @@ Package Name:
 Technology:
 
 Build/Run Instructions:
+
+
 
 Environment Variables:
 
