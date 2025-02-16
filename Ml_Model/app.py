@@ -8,7 +8,7 @@ import io
 app = Flask(__name__)
 
 # Load the trained CNN model
-model = tf.keras.models.load_model("skin_cancer_cnn_model.keras")
+model = tf.keras.models.load_model("./data/skin_cancer_model.keras")
 class_labels =  ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]
 # Image Preprocessing Function
 def preprocess_image(image):
@@ -21,6 +21,7 @@ def preprocess_image(image):
 @app.route("/predict", methods=["POST"])
 def predict():
     if "file" not in request.files:
+        print(request.files)
         return jsonify({"error": "No file provided"}), 400
 
     file = request.files["file"]
