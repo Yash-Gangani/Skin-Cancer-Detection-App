@@ -1,4 +1,3 @@
-import { errorHandler } from './middleware/errorHandler';
 
 
 
@@ -26,14 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use(errorHandler);
 
-
-app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5000'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
-}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
