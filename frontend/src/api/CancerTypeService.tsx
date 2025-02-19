@@ -1,6 +1,8 @@
 import { API_ENDPOINTS } from './config';
 
 export interface CancerType {
+  recommendations: string[];
+  additionalFindings: { condition: string; probability: number; }[];
   name: string;
   description: string;
   treatment: string[];
