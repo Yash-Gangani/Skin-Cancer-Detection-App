@@ -1,6 +1,6 @@
 name: ML Model Training & Deployment
 
-on:
+on: 
   push:
     branches:
       - development
