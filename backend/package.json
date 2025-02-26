@@ -4,7 +4,8 @@
   "description": "Skin Cancer Detection Backend",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js"
+    "dev": "nodemon ./index.js --exec babel-node -e js",
+    "vercel-build": "npm run build"
   },
   "author": "",
   "license": "ISC",
