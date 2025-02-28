@@ -14,7 +14,11 @@ import {
   Brain,
 } from "lucide-react";
 
-type AnalysisResult = {
+const URL = import.meta.env.VITE_BACK_END_URL;
+console.log("Backend URL: " + URL);
+
+
+/*type AnalysisResult = {
   diagnosis: string;
   confidence: number;
   recommendations: string[];
@@ -22,14 +26,31 @@ type AnalysisResult = {
     condition: string;
     probability: number;
   }>;
-};
+};*/
+
+async function pingBackend(){
+  try {
+    const response = await fetch(URL);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.text();
+    console.log(json);
+    alert(json);
+  }
+  catch (error) {
+    console.error("Failed to ping backend:", error);
+    alert("failed to ping backend");
+  }
+  
+}
 
 function AnalysisPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"upload" | "camera">("upload");
   const [image, setImage] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [result, setResult] = useState(null);
   const webcamRef = React.useRef<Webcam>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -68,22 +89,12 @@ function AnalysisPage() {
 
     setIsAnalyzing(true);
     // Simulated API call
-    setTimeout(() => {
-      setResult({
-        diagnosis: "Benign Melanocytic Nevus",
-        confidence: 0.89,
-        recommendations: [
-          "No immediate medical attention required",
-          "Continue monitoring for changes",
-          "Use sun protection regularly",
-        ],
-        additionalFindings: [
-          { condition: "Solar Lentigines", probability: 0.15 },
-          { condition: "Seborrheic Keratosis", probability: 0.08 },
-        ],
-      });
-      setIsAnalyzing(false);
-    }, 2000);
+    pingBackend();
+    
+
+    setIsAnalyzing(false);
+    resetAnalysis()
+   
   };
 
   const resetAnalysis = () => {
@@ -156,7 +167,8 @@ function AnalysisPage() {
               </>
             ) : (
               <div className="relative">
-                <img src={image} alt="Uploaded" className="w-full rounded-xl" />
+                <img src={image} alt="Uploaded" className="w-full rounded-xl max-w-[90%] mx-auto" />
+      
                 <button
                   type="button"
                   onClick={resetAnalysis}
@@ -170,7 +182,7 @@ function AnalysisPage() {
             )}
 
             {!result && (
-              <Button type="button" onClick={analyzeImage} disabled={isAnalyzing} className="w-full">
+              <Button type="button" onClick={analyzeImage} disabled={isAnalyzing} className="w-full mt-2">
                 {isAnalyzing ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Brain className="mr-2 h-5 w-5" />}
                 {isAnalyzing ? "Analyzing..." : "Analyze Image"}
               </Button>
