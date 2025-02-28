@@ -6,18 +6,19 @@ import routes from './routes/routes';
 import 'dotenv/config'
 
 const app = express();
-const PORT = 4000;
 
 // DB connection
 mongoose.Promise = global.Promise
-
+let PORT;
+let MONGO_URI;
 try{
-  const mongoURI = process.env.MONGO_URI;
-  if (!mongoURI) {
+  [PORT, MONGO_URI] = process.env.NODE_ENV === 'prod' ? [process.env.PROD_PORT, process.env.PROD_MONGO_URI] : [process.env.DEV_PORT, process.env.DEV_MONGO_URI];
+  console.log(PORT)
+  if (!MONGO_URI) {
     throw new Error('MONGO_URI environment variable not set');
   }
-  mongoose.connect(mongoURI)
-  console.log('Connected to MongoDB Atlas');  
+  mongoose.connect(MONGO_URI)
+  console.log('Connected to MongoDB');  
 } 
 catch(err){
   console.error('Error connecting to MongoDB Atlas:', err);

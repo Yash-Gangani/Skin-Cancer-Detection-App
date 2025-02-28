@@ -8,7 +8,7 @@ const contributors = [
   { name: "Yash Gangani", image: "/yash.jpg", role: "ML Researcher" },
   { name: "Zarana Jodhani", image: "/zarana.png", role: "DevOps Engineer" },
   { name: "Shlok Kadakia", image: "/shlok.jpg", role: "Frontend Developer" },
-  { name: "John Smillie", image: "/john.jpg", role: "ML Researcher" },
+  { name: "John Smillie", image: "/john.jpg", role: "Full-Stack/DevOps Engineer" },
   { name: "JayaLaksmi", image: "/shlok.jpg", role: "AI Researcher" },
   { name: "Ashutosh Bhalala", image: "/ashutosh.jpg", role: "Backend Developer" },
 ];

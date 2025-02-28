@@ -16,17 +16,13 @@ DePaul University SE491 Team Project
 
 **Technology:** Node, Express, MongoDB, Babel, Nodemon
 
-**Build/Run Instructions:** 
+**Scripts:** 
+
+Local Development: 
 
 `$ cd backend`
 
-`$ npm start`
-
-**Local Variables:**
-
-URL: `localhost:4000/`
-
-**Environment Variables:**
+`$ npm run dev`
 
 <hr>
 
