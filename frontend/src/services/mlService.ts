@@ -1,10 +1,4 @@
-// src/services/mlService.ts
 
-/**
- * Service to handle interactions with the ML model API
- */
-
-// Define the result type based on your ML model's output
 export interface SkinAnalysisResult {
     prediction: string;
     confidence: number;
@@ -19,9 +13,6 @@ export interface SkinAnalysisResult {
     };
   }
   
-  /**
-   * Convert base64 image to a Blob
-   */
   function base64ToBlob(base64: string, contentType: string = 'image/jpeg'): Blob {
     const byteCharacters = atob(base64.split(',')[1]);
     const byteArrays = [];
@@ -40,13 +31,7 @@ export interface SkinAnalysisResult {
     return new Blob(byteArrays, { type: contentType });
   }
   
-  /**
-   * Analyze skin image using ML model API
-   * @param imageData - Base64 encoded image or File object
-   */
-  // Correct way to construct the URL
 export async function analyzeSkinImage(imageData: string | File): Promise<SkinAnalysisResult> {
-    // Make sure we're appending /predict to the base URL
     const baseUrl = import.meta.env.VITE_ML_API_URL || 'http://localhost:5001';
     const predictUrl = `${baseUrl}/predict`;
     
