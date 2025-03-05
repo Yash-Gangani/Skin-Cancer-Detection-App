@@ -11,8 +11,11 @@
     "prod": "vite"
   },
   "dependencies": {
+    "axios": "^1.8.1",
     "clsx": "^2.1.0",
     "framer-motion": "^11.18.2",
+    "jspdf": "^3.0.0",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.475.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -24,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@types/axios": "^0.9.36",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

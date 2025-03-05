@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - VITE_BACK_END_URL=http://backend:4000
+      - VITE_ML_API_URL=http://ml-api:5001
+    depends_on:
+      - backend
+      - ml-api
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=prod
+      - PROD_PORT=4000
+      - PROD_MONGO_URI=mongodb://mongo:27017/skincare
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  ml-api:
+    build:
+      context: ./Ml_Model
+      dockerfile: dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./Ml_Model/data:/app/data
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
