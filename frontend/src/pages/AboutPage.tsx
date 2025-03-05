@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { div } from "framer-motion/client";
 
 const contributors = [
   { name: "Yash Gangani", image: "/yash.jpg", role: "ML Researcher" },
