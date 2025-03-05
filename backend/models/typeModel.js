@@ -1,7 +1,30 @@
+// import mongoose from "mongoose";
+
+// const Schema = mongoose.Schema
+
+
+// export const TypeSchema = new Schema({
+//     name: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
+//     description: {
+//         type: String
+//     },
+//     treatment: {
+//         type: [String]
+//     },
+//     next_steps: {
+//         type: [String]
+//     }
+// })
+
+
+
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
-
+const Schema = mongoose.Schema;
 
 export const TypeSchema = new Schema({
     name: {
@@ -10,12 +33,19 @@ export const TypeSchema = new Schema({
         unique: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     treatment: {
-        type: [String]
+        type: [String],
+        required: true
     },
     next_steps: {
-        type: [String]
+        type: [String],
+        required: true
     }
-})
+});
+
+// Create Model
+const Type = mongoose.model("Type", TypeSchema);
+export default Type;

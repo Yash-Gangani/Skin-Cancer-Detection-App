@@ -2,6 +2,7 @@
   "name": "backend2",
   "version": "1.0.0",
   "description": "Skin Cancer Detection Backend",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=dev nodemon ./index.js --exec babel-node -e js",
