@@ -31,37 +31,38 @@ export interface SkinAnalysisResult {
     return new Blob(byteArrays, { type: contentType });
   }
   
+
+
 export async function analyzeSkinImage(imageData: string | File): Promise<SkinAnalysisResult> {
-    const baseUrl = import.meta.env.VITE_ML_API_URL || 'http://localhost:5001';
-    const predictUrl = `${baseUrl}/predict`;
+  const baseUrl = import.meta.env.VITE_ML_API_URL || 'http://localhost:5001';
+  const predictUrl = `${baseUrl}/predict`;
+  
+  console.log(`Sending request to: ${predictUrl}`);
+  
+  try {
+    const formData = new FormData();
     
-    console.log(`Sending request to: ${predictUrl}`);
-    
-    try {
-      const formData = new FormData();
-      
-      if (typeof imageData === 'string') {
-        // Convert base64 to Blob for FormData
-        const blob = base64ToBlob(imageData);
-        formData.append('image', blob, 'image.jpg');
-      } else {
-        // If it's already a File object
-        formData.append('image', imageData);
-      }
-  
-      const response = await fetch(predictUrl, {
-        method: 'POST',
-        body: formData,
-      });
-  
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-  
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error('Error analyzing image:', error);
-      throw error;
+    if (typeof imageData === 'string') {
+      const blob = base64ToBlob(imageData);
+      formData.append('image', blob, 'image.jpg');
+    } else {
+      formData.append('image', imageData);
     }
+
+    const response = await fetch(predictUrl, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      console.error(`API error: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error analyzing image:', error);
+    throw error;
   }
+}
