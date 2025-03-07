@@ -43,11 +43,30 @@ catch(err) {
   console.error('Error in connection setup:', err);
 }
 
-// Set server to continue even without MongoDB
-mongoose.connection.on('error', (err) => {
+// Set server to continue even without MongoDB -- closed for now
+// mongoose.connection.on('error', (err) => {
+//   console.error('MongoDB connection error:', err);
+//   console.warn('Continuing without database connection');
+// });
+
+
+//set up mongo for render
+mongoose.connect(MONGO_URI, PORT,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  ssl: true,
+  retryWrites: true,
+  w: 'majority'
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => {
   console.error('MongoDB connection error:', err);
   console.warn('Continuing without database connection');
 });
+
+
+
+
 
 // body parser
 app.use(bodyParser.urlencoded({extended: true}))
