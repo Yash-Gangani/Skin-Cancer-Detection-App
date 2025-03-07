@@ -23,16 +23,15 @@ function CancerInfoPage() {
     const fetchCancerData = async () => {
       try {
         setLoading(true);
-        // const response = await axios.get('/api/cancer-types');
-        // console.log('Cancer data response:', response.data); 
-      //   const backendUrl = (window as any).APP_CONFIG?.BACKEND_URL || 'https://skin-cancer-detection-app-backend.onrender.com';
-      // const response = await axios.get(`${backendUrl}/api/cancer-types`);
-      // console.log('Cancer data response:', response.data);
+        const backendUrl = (window as any).APP_CONFIG?.BACKEND_URL || 'https://skin-cancer-detection-app-backend.onrender.com';
+        const response = await axios.get(`${backendUrl}/api/cancer-types`);
+        console.log('Cancer data response:', response.data);
+      
 
-      const corsProxyUrl = 'https://corsproxy.io/?';
-    const targetUrl = 'https://skin-cancer-detection-app-backend.onrender.com/api/cancer-types';
-    const response = await axios.get(`${corsProxyUrl}${encodeURIComponent(targetUrl)}`);
-    setCancerTypes(response.data as CancerType[]);
+    //   const corsProxyUrl = 'https://corsproxy.io/?';
+    // const targetUrl = 'https://skin-cancer-detection-app-backend.onrender.com/api/cancer-types';
+    // const response = await axios.get(`${corsProxyUrl}${encodeURIComponent(targetUrl)}`);
+    // setCancerTypes(response.data as CancerType[]);
         
         let data;
         if (Array.isArray(response.data)) {
