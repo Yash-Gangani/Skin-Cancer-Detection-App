@@ -37,10 +37,14 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  // define: {
+  //   // Use placeholders that will be replaced at runtime
+  //   'import.meta.env.VITE_BACK_END_URL': JSON.stringify('__VITE_BACK_END_URL__'),
+  //   'import.meta.env.VITE_ML_API_URL': JSON.stringify('__VITE_ML_API_URL__')
+  // },
   define: {
-    // Use placeholders that will be replaced at runtime
-    'import.meta.env.VITE_BACK_END_URL': JSON.stringify('__VITE_BACK_END_URL__'),
-    'import.meta.env.VITE_ML_API_URL': JSON.stringify('__VITE_ML_API_URL__')
+    'import.meta.env.VITE_BACK_END_URL': JSON.stringify(process.env.VITE_BACK_END_URL || 'http://localhost:4000'),
+    'import.meta.env.VITE_ML_API_URL': JSON.stringify(process.env.VITE_ML_API_URL || 'http://localhost:5001')
   },
   server: {
     proxy: {
