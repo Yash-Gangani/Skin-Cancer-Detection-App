@@ -9,8 +9,16 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 
+
+#main for developement
+# app = Flask(__name__)
+# CORS(app)  
+
+
+#for production
 app = Flask(__name__)
-CORS(app)  
+CORS(app, origins=["https://skin-cancer-detection-app-zeta.vercel.app/", "http://localhost:5173"])
+
 
 try:
     model_path = "data/skin_cancer_cnn.keras"  

@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   frontend:
+    image: ${DOCKER_USERNAME:-username}/skin-cancer-frontend:latest
     build:
       context: ./frontend
       dockerfile: dockerfile
@@ -17,21 +18,23 @@ services:
       - app-network
 
   backend:
+    image: ${DOCKER_USERNAME:-username}/skin-cancer-backend:latest
     build:
       context: ./backend
       dockerfile: dockerfile
     ports:
-      - "4000:4000"
+      - "4001:4000"
     environment:
       - NODE_ENV=prod
       - PROD_PORT=4000
-      - PROD_MONGO_URI=mongodb://mongo:27017/skincare
-    depends_on:
-      - mongo
+      - PROD_MONGO_URI=mongodb+srv://skinocare:skinocare@skinocare-prod.vdn9n.mongodb.net/
     networks:
       - app-network
+    volumes:
+      - ./backend/cancers.json:/app/cancers.json
 
   ml-api:
+    image: ${DOCKER_USERNAME:-username}/skin-cancer-ml-api:latest
     build:
       context: ./Ml_Model
       dockerfile: dockerfile
@@ -42,18 +45,10 @@ services:
     networks:
       - app-network
 
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - app-network
-
 networks:
   app-network:
     driver: bridge
 
 volumes:
   mongo-data:
+    driver: local

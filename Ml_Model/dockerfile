@@ -1,4 +1,8 @@
+# Use Python slim image for smaller size
 FROM python:3.9-slim
+
+# Create a non-root user
+RUN groupadd -r appuser && useradd -r -g appuser appuser
 
 WORKDIR /app
 
@@ -12,15 +16,21 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy model files and application code
+# Copy only the necessary files
 COPY app.py .
 COPY data/ ./data/
 
-# If you want to include the cancer details JSON
-COPY ../backend/cancers.json ./cancers.json
+# Set the proper permissions
+RUN chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
 
 # Expose port for API
 EXPOSE 5001
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
 
 # Run the Flask API
 CMD ["python", "app.py"]

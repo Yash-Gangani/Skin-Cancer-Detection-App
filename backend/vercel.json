@@ -1,0 +1,22 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "PROD_PORT": "4000",
+      "PROD_MONGO_URI": "@prod_mongo_uri"
+    }
+  }
+
+  

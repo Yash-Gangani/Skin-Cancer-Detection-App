@@ -52,9 +52,16 @@ mongoose.connection.on('error', (err) => {
 // body parser
 app.use(bodyParser.urlencoded({extended: true}))
 
-// cors
+// cors -- originally used for development
+// app.use(cors({
+//   origin: ['http://localhost:5173', 'http://localhost:3000'],
+//   credentials: true
+// }));
+
+
+//for production
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: ['https://skin-cancer-detection-app-zeta.vercel.app/', 'http://localhost:5173'],
   credentials: true
 }));
 

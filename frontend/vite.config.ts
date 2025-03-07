@@ -10,11 +10,38 @@
 // });
 
 
+
+//Main
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+
+// export default defineConfig({
+//   plugins: [react()],
+//   server: {
+//     proxy: {
+//       '/api': {
+//         target: 'http://localhost:4000',
+//         changeOrigin: true,
+//         secure: false
+//       },
+//     },
+//   },
+// });
+
+
+
+
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    // Use placeholders that will be replaced at runtime
+    'import.meta.env.VITE_BACK_END_URL': JSON.stringify('__VITE_BACK_END_URL__'),
+    'import.meta.env.VITE_ML_API_URL': JSON.stringify('__VITE_ML_API_URL__')
+  },
   server: {
     proxy: {
       '/api': {

@@ -1,23 +1,42 @@
-
-
-name: Vercel Frontend Production Deployment
+name: Frontend CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
-      - ../../frontend
+      - 'frontend/**'
+  workflow_dispatch:
+
 jobs:
-  Deploy-Preview:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Vercel Action
-        uses: BetaHuhn/deploy-to-vercel-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './frontend/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Vercel
+        working-directory: ./frontend
+        run: |
+          vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --prod --yes
+        env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FRONTEND }}
-          DEPLOY_PR_FROM_FORK: true 

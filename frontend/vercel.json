@@ -1,0 +1,14 @@
+{
+    "framework": "vite",
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/index.html" }
+    ],
+    "env": {
+      "VITE_BACK_END_URL": "@vite_back_end_url",
+      "VITE_ML_API_URL": "@vite_ml_api_url"
+    }
+  }
+
+  

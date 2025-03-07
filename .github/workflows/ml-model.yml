@@ -1,43 +1,104 @@
-name: ML Model Training & Deployment
+name: ML Model CI/CD
 
-on: 
+on:
   push:
     branches:
-      - development
       - main
+      - development
+    paths:
+      - 'Ml_Model/**'
   pull_request:
     branches:
-      - development
       - main
+      - development
+    paths:
+      - 'Ml_Model/**'
 
 jobs:
-  train-and-deploy:
+  test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Ml_Model
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          cache: 'pip'
+          cache-dependency-path: './Ml_Model/requirements.txt'
 
       - name: Install dependencies
-        run: pip install -r ml_model/requirements.txt
-
-      - name: Run unit tests
-        run: pytest ml_model/
-
-      - name: Train model
-        run: python ml_model/train.py
-
-      - name: Validate model
-        run: python ml_model/validate.py
-
-      - name: Deploy model
-        if: github.ref == 'refs/heads/main'
         run: |
-          dvc add ml_model/trained_model.pkl
-          git add ml_model/trained_model.pkl.dvc
-          git commit -m "Updated model"
-          git push origin main
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Lint with flake8
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Test API Endpoints
+        run: |
+          # Run simple tests against the API
+          python -m pytest -xvs
+
+  docker-build-push:
+    needs: test
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/development')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set Docker tag
+        id: set-tag
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "TAG=latest" >> $GITHUB_OUTPUT
+          else
+            echo "TAG=dev" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./Ml_Model
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/skincare-ml:${{ steps.set-tag.outputs.TAG }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/skincare-ml:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/skincare-ml:buildcache,mode=max
+
+  deploy:
+    needs: docker-build-push
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd /opt/skincare
+            docker-compose pull ml-api
+            docker-compose up -d ml-api

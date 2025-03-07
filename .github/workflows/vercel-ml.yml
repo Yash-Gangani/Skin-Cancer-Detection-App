@@ -1,23 +1,40 @@
-
-
-name: Vercel ML Model Production Deployment
+name: ML Model CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
-      - ../../Ml_Model
+      - 'Ml_Model/**'
+  workflow_dispatch:
+
 jobs:
-  Deploy-Preview:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Vercel Action
-        uses: BetaHuhn/deploy-to-vercel-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          python-version: '3.9'
+          cache: 'pip'
+          cache-dependency-path: './Ml_Model/requirements.txt'
+
+      - name: Install dependencies
+        working-directory: ./Ml_Model
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Vercel
+        working-directory: ./Ml_Model
+        run: |
+          vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --prod --yes
+        env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ML }}
-          DEPLOY_PR_FROM_FORK: true 
