@@ -185,9 +185,24 @@ export async function checkMlApiHealth(): Promise<boolean> {
  * Fetches cancer type information from the backend
  * @returns Promise with cancer type information
  */
+// export async function getCancerTypes() {
+//   try {
+//     const response = await fetch(`${BACKEND_URL}/api/cancer-types`);
+    
+//     if (!response.ok) {
+//       throw new Error(`Failed to fetch cancer types: ${response.status}`);
+//     }
+    
+//     return await response.json();
+//   } catch (error) {
+//     console.error('Error fetching cancer types:', error);
+//     throw error;
+//   }
+// }
+
 export async function getCancerTypes() {
   try {
-    const response = await fetch(`${BACKEND_URL}/api/cancer-types`);
+    const response = await fetch(`${import.meta.env.VITE_BACK_END_URL}/api/cancer-types`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch cancer types: ${response.status}`);
