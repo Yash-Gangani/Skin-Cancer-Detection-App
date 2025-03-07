@@ -218,12 +218,12 @@ We welcome contributions from the community! Please read our contribution guidel
 
 | Name | Background | Tasks |
 | ---- | ---- | ---- |
-| Shlok Kadakia | <ul><li>MS in Computer Science (DePaul University, November '25)</li><li>Bachelors in Information Technology (2019-2023, Navrachana University, India)</li><li>Born: Dahod, Gujarat, India; Current: Carol Stream, IL</li><li>Javascript, Python, React.js, Java, SQL, Docker</li></ul>| React.js frontend, backend development, Docker configuration, CI/CD pipeline |
-| John Smillie | <ul><li>MS in Computer Science: Software Engineering (June '25)</li><li>Born: Ann Arbor, MI; Current: Chicago, IL</li><li>Bachelor in Music from Roosevelt University</li><li>Java, HTML, CSS, JavaScript, SQL, Spring, React.js, Azure, .NET</li></ul>| React.js frontend, Express.js backend, CI/CD pipeline |
-| Zarana Jodhani |<ul><li>MS in Computer Science: (June'26)</li><li>Chicago, IL</li><li>Bachelor in Information Technology(Gujarat, India)</li><li>Python, HTML, CSS, SQL, React.js, Azure, Docker, Kubernetes</li></ul>| Frontend development, Docker configuration |
+| Shlok Kadakia | <ul><li>MS in Computer Science (DePaul University, November '25)</li><li>Bachelors in Information Technology (2019-2023, Navrachana University, India)</li><li>Born: Dahod, Gujarat, India; Current: Carol Stream, IL</li><li>Javascript, Python, React.js, Java, SQL, Docker, .NET</li></ul>| React.js frontend, backend development, Docker configuration, CI/CD pipeline |
+| John Smillie | <ul><li>MS in Computer Science: Software Engineering (June '25)</li><li>Born: Ann Arbor, MI; Current: Chicago, IL</li><li>Bachelor in Music from Roosevelt University</li><li>Java, HTML, CSS, JavaScript, SQL, Spring, React.js, Azure, .NET</li></ul>| Express.js backend, CI/CD pipeline |
+| Zarana Jodhani |<ul><li>MS in Computer Science: (June'26)</li><li>Chicago, IL</li><li>Bachelor in Information Technology(Gujarat, India)</li><li>Python, HTML, CSS, SQL, React.js, Azure, Docker, Kubernetes</li></ul>| Docker configuration, CI/CD pipeline |
 | Jayalakshmi Thrisalapuram Jayaprakash | <ul><li>MS in Software Engineering (DePaul University, Present)</li><li>Master of Intelligence Systems and Robotics (2022-2023, University of Essex)</li><li>Born: Kerala, India; Current: Summit, IL</li><li>ASP .NET, C#, HTML, CSS, SQL Server, Python, Machine Learning, Neural Networking</li></ul>| Building ML models, image analysis algorithms, backend systems |
 | Ashutosh Bhalala | <ul><li>MS in Software Engineering (DePaul University, June '25)</li><li>Bachelors in Computer Science (2019-2023, University of Wisconsin-Madison)</li><li>Born: Waukegan, Illinois; Current: Gurnee, IL</li><li>Javascript, Python, React.js, HTML, CSS, SQL</li></ul>| Frontend and backend development, testing |
-| Yash Gangani | <ul><li>MS in Computer Science: Software and System Development (June '25)</li><li>Chicago, IL</li><li>Bachelor in Information Technology from Mumbai University</li><li>Java, HTML5, CSS3, R, SQL, Python, React.js, .NET</li></ul>| Database design, API development |
+| Yash Gangani | <ul><li>MS in Computer Science: Software and System Development (June '25)</li><li>Chicago, IL</li><li>Bachelor in Information Technology from Mumbai University</li><li>Java, HTML5, CSS3, R, SQL, Python, React.js, .NET</li></ul>| Database design, Backend systems, Image analysis algorithms|
 
 ## 📄 License
 
@@ -232,6 +232,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 <div align="center">
-  <p>Built with ❤️ at DePaul University</p>
+  <p>Built with ❤️ at SkinOCare AI Team</p>
   <p>© 2025 SkinOCare AI Team</p>
 </div>
