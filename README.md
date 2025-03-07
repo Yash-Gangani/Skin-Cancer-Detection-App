@@ -34,6 +34,9 @@ SkinOCare AI is a comprehensive web application developed at DePaul University (
 
 The system analyzes dermoscopic images using a CNN-based machine learning model trained on the HAM10000 dataset, which consists of over 10,000 dermatoscopic images of common pigmented skin lesions. The application provides detailed information about the detected skin condition, recommended next steps, and available treatment options.
 
+> ⚠️ **Disclaimer**: SkinOCare AI is a research and educational tool and should not replace professional medical diagnosis. Always consult with a healthcare professional for medical advice.
+
+
 ## ✨ Features
 
 - **Image Analysis**: Upload and analyze dermoscopic images for skin cancer detection
@@ -136,6 +139,35 @@ The system analyzes dermoscopic images using a CNN-based machine learning model 
    pip install -r requirements.txt
    python app.py
    ```
+   **Setup MongoDB (required for backend)**
+   ```bash
+   # Option 1: Use MongoDB Atlas cloud database
+   Update .env file with your MongoDB Atlas connection string
+   
+   # Option 2: Run MongoDB locally
+   docker run -d -p 27017:27017 --name mongodb mongo:latest
+   ```
+
+
+### Environment Variables
+
+Create the following `.env` files for local development:
+
+- **Frontend (.env.development)**
+   ```bash
+   VITE_BACK_END_URL=http://localhost:4000
+   VITE_ML_API_URL=http://localhost:5001
+   ```
+
+- **Backend (.env)**
+   ```bash
+   NODE_ENV=development
+   DEV_PORT=4000
+   DEV_MONGO_URI=mongodb://localhost:27017/skinocare
+   PROD_PORT=4000
+   PROD_MONGO_URI=mongodb://mongo:27017/skinocare
+   ```
+
 
 ### Running the Application
 
@@ -143,6 +175,67 @@ After starting all components:
 - Frontend: http://localhost:80
 - Backend API: http://localhost:4000
 - ML API: http://localhost:5001
+
+
+## 🏗 Architecture
+
+### System Architecture
+
+SkinOCare AI follows a microservices architecture pattern with three main components:
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   Frontend  │────▶│   Backend   │────▶│   ML API    │
+│  (React.js) │◀────│  (Node.js)  │◀────│   (Flask)   │
+└─────────────┘     └─────────────┘     └─────────────┘
+                          │
+                          ▼
+                    ┌─────────────┐
+                    │  Database   │
+                    │  (MongoDB)  │
+                    └─────────────┘
+```
+
+1. **Frontend (Presentation Layer)**:
+   - Responsible for user interface and interactions
+   - Communicates with the backend through RESTful API calls
+
+2. **Backend (Application Layer)**:
+   - Handles business logic and data processing
+   - Provides RESTful API endpoints for the frontend
+   - Communicates with the ML API for image analysis
+   - Manages database operations
+
+3. **ML API (Machine Learning Layer)**:
+   - Processes image data using the trained CNN model
+   - Returns prediction results and confidence scores
+   - Operates independently from the main application
+
+4. **Database (Data Layer)**:
+   - Stores cancer type information and metadata
+   - Potentially stores user data and analysis history (future implementation)
+
+
+## 💻 Frontend
+
+The frontend is built with React and TypeScript, providing a responsive and intuitive user interface. Key pages include:
+
+- **Landing Page**: Introduction to the application
+- **Analysis Page**: Upload and analyze skin images
+- **Cancer Information**: Educational resources about different skin cancers
+- **About Page**: Project and team information
+
+## 🔧 Backend
+
+Our Node.js backend serves as an intermediary between the frontend and the ML model, handling authentication, data storage, and API proxying. It provides a unified API for the frontend and ensures secure communication with the ML service.
+
+## 🔄 CI/CD
+
+We use GitHub Actions for continuous integration and deployment:
+
+- Automated testing of frontend, backend, and ML components
+- Docker image building and publishing
+- Deployment to Vercel for staging and production environments
 
 ## 🧠 Machine Learning Model
 
@@ -182,27 +275,6 @@ The model achieved approximately 75.94% accuracy on the test dataset. For produc
 - `GET /api/cancers`: Get all cancer types information
 - `GET /api/cancers/:id`: Get specific cancer information
 - `POST /api/upload`: Upload an image for analysis (proxies to ML service)
-
-## 💻 Frontend
-
-The frontend is built with React and TypeScript, providing a responsive and intuitive user interface. Key pages include:
-
-- **Landing Page**: Introduction to the application
-- **Analysis Page**: Upload and analyze skin images
-- **Cancer Information**: Educational resources about different skin cancers
-- **About Page**: Project and team information
-
-## 🔧 Backend
-
-Our Node.js backend serves as an intermediary between the frontend and the ML model, handling authentication, data storage, and API proxying. It provides a unified API for the frontend and ensures secure communication with the ML service.
-
-## 🔄 CI/CD
-
-We use GitHub Actions for continuous integration and deployment:
-
-- Automated testing of frontend, backend, and ML components
-- Docker image building and publishing
-- Deployment to Vercel for staging and production environments
 
 ## 👥 Contributing
 
