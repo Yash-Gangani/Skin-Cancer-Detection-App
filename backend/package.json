@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=dev nodemon ./index.js --exec babel-node -e js",
     "test": "jest",
     "vercel-build": "npm run build",
-    "prod": "NODE_ENV=prod nodemon ./index.js --exec babel-node -e js"
+    "prod": "NODE_ENV=prod nodemon ./index.js --exec babel-node -e js",
+    "start": "NODE_ENV=prod babel-node index.js"
   },
   "author": "",
   "license": "ISC",
